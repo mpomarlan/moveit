@@ -62,6 +62,8 @@ void moveit_warehouse::RobotStateStorage::reset()
 
 void moveit_warehouse::RobotStateStorage::addRobotState(const moveit_msgs::RobotState &msg, const std::string &name, const std::string &robot)
 {
+  ROS_INFO("Dirty HAXX: Moveit should store a robot state here, but won't.");
+/*
   bool replace = false;
   if (hasRobotState(name, robot))
   {
@@ -72,15 +74,21 @@ void moveit_warehouse::RobotStateStorage::addRobotState(const moveit_msgs::Robot
                                ROBOT_NAME, robot);
   state_collection_->insert(msg, metadata);
   ROS_DEBUG("%s robot state '%s'", replace ? "Replaced" : "Added", name.c_str());
+*/
 }
 
 bool moveit_warehouse::RobotStateStorage::hasRobotState(const std::string &name, const std::string &robot) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get a robot state here, but won't.");
+
+  return false;
+/*
   mongo_ros::Query q(STATE_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
   std::vector<RobotStateWithMetadata> constr = state_collection_->pullAllResults(q, true);
   return !constr.empty();
+*/
 }
 
 void moveit_warehouse::RobotStateStorage::getKnownRobotStates(const std::string &regex, std::vector<std::string> &names, const std::string &robot) const
@@ -92,6 +100,9 @@ void moveit_warehouse::RobotStateStorage::getKnownRobotStates(const std::string 
 void moveit_warehouse::RobotStateStorage::getKnownRobotStates(std::vector<std::string> &names, const std::string &robot) const
 {
   names.clear();
+  ROS_INFO("Dirty HAXX: Moveit should get known robot states here, but won't.");
+
+/*
   mongo_ros::Query q;
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -99,10 +110,15 @@ void moveit_warehouse::RobotStateStorage::getKnownRobotStates(std::vector<std::s
   for (std::size_t i = 0; i < constr.size() ; ++i)
     if (constr[i]->metadata.hasField(STATE_NAME.c_str()))
       names.push_back(constr[i]->lookupString(STATE_NAME));
+*/
 }
 
 bool moveit_warehouse::RobotStateStorage::getRobotState(RobotStateWithMetadata &msg_m, const std::string &name, const std::string &robot) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get a robot state here, but won't.");
+
+  return false;
+/*
   mongo_ros::Query q(STATE_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -114,23 +130,32 @@ bool moveit_warehouse::RobotStateStorage::getRobotState(RobotStateWithMetadata &
     msg_m = constr.front();
     return true;
   }
+*/
 }
 
 void moveit_warehouse::RobotStateStorage::renameRobotState(const std::string &old_name, const std::string &new_name, const std::string &robot)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename a robot state here, but won't.");
+
+/*
   mongo_ros::Query q(STATE_NAME, old_name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
   mongo_ros::Metadata m(STATE_NAME, new_name);
   state_collection_->modifyMetadata(q, m);
   ROS_DEBUG("Renamed robot state from '%s' to '%s'", old_name.c_str(), new_name.c_str());
+*/
 }
 
 void moveit_warehouse::RobotStateStorage::removeRobotState(const std::string &name, const std::string &robot)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove a robot state here, but won't.");
+
+/*
   mongo_ros::Query q(STATE_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
   unsigned int rem = state_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u RobotState messages (named '%s')", rem, name.c_str());
+*/
 }

@@ -45,6 +45,15 @@
 namespace moveit_warehouse
 {
 
+typedef moveit_msgs::PlanningSceneConstPtr PlanningSceneWithMetadata;
+typedef moveit_msgs::MotionPlanRequestConstPtr MotionPlanRequestWithMetadata;
+typedef moveit_msgs::RobotTrajectoryConstPtr RobotTrajectoryWithMetadata;
+
+typedef boost::shared_ptr<std::vector<moveit_msgs::PlanningScene> > PlanningSceneCollection;
+typedef boost::shared_ptr<std::vector<moveit_msgs::MotionPlanRequest> > MotionPlanRequestCollection;
+typedef boost::shared_ptr<std::vector<moveit_msgs::RobotTrajectory> > RobotTrajectoryCollection;
+
+/* DIRTY HAXX
 typedef mongo_ros::MessageWithMetadata<moveit_msgs::PlanningScene>::ConstPtr PlanningSceneWithMetadata;
 typedef mongo_ros::MessageWithMetadata<moveit_msgs::MotionPlanRequest>::ConstPtr MotionPlanRequestWithMetadata;
 typedef mongo_ros::MessageWithMetadata<moveit_msgs::RobotTrajectory>::ConstPtr RobotTrajectoryWithMetadata;
@@ -52,6 +61,7 @@ typedef mongo_ros::MessageWithMetadata<moveit_msgs::RobotTrajectory>::ConstPtr R
 typedef boost::shared_ptr<mongo_ros::MessageCollection<moveit_msgs::PlanningScene> > PlanningSceneCollection;
 typedef boost::shared_ptr<mongo_ros::MessageCollection<moveit_msgs::MotionPlanRequest> > MotionPlanRequestCollection;
 typedef boost::shared_ptr<mongo_ros::MessageCollection<moveit_msgs::RobotTrajectory> > RobotTrajectoryCollection;
+*/
 
 class PlanningSceneStorage : public MoveItMessageStorage
 {

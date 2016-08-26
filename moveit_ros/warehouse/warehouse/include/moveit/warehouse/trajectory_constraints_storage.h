@@ -43,8 +43,13 @@
 namespace moveit_warehouse
 {
 
+typedef moveit_msgs::TrajectoryConstraintsConstPtr TrajectoryConstraintsWithMetadata;
+typedef boost::shared_ptr<std::vector<moveit_msgs::TrajectoryConstraints> > TrajectoryConstraintsCollection;
+
+/* DIRTY HAXX
 typedef mongo_ros::MessageWithMetadata<moveit_msgs::TrajectoryConstraints>::ConstPtr TrajectoryConstraintsWithMetadata;
 typedef boost::shared_ptr<mongo_ros::MessageCollection<moveit_msgs::TrajectoryConstraints> > TrajectoryConstraintsCollection;
+*/
 
 class TrajectoryConstraintsStorage : public MoveItMessageStorage
 {

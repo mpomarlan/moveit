@@ -63,6 +63,8 @@ void moveit_warehouse::TrajectoryConstraintsStorage::reset(void)
 
 void moveit_warehouse::TrajectoryConstraintsStorage::addTrajectoryConstraints(const moveit_msgs::TrajectoryConstraints &msg, const std::string &name, const std::string &robot, const std::string &group)
 {
+  ROS_INFO("Dirty HAXX: Moveit should store trajectory constraints here, but won't.");
+/*
   bool replace = false;
   if (hasTrajectoryConstraints(name, robot, group))
   {
@@ -74,11 +76,14 @@ void moveit_warehouse::TrajectoryConstraintsStorage::addTrajectoryConstraints(co
                                CONSTRAINTS_GROUP_NAME, group);
   constraints_collection_->insert(msg, metadata);
   ROS_DEBUG("%s constraints '%s'", replace ? "Replaced" : "Added", name.c_str());
+*/
 }
 
 bool moveit_warehouse::TrajectoryConstraintsStorage::hasTrajectoryConstraints(const std::string &name, const std::string &robot, const std::string &group) const
 {
-
+  ROS_INFO("Dirty HAXX: Moveit should get trajectory constraints here, but won't.");
+  return false;
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -86,6 +91,7 @@ bool moveit_warehouse::TrajectoryConstraintsStorage::hasTrajectoryConstraints(co
     q.append(CONSTRAINTS_GROUP_NAME, group);
   std::vector<TrajectoryConstraintsWithMetadata> constr = constraints_collection_->pullAllResults(q, true);
   return !constr.empty();
+*/
 }
 
 void moveit_warehouse::TrajectoryConstraintsStorage::getKnownTrajectoryConstraints(const std::string &regex, std::vector<std::string> &names, const std::string &robot, const std::string &group) const
@@ -97,6 +103,8 @@ void moveit_warehouse::TrajectoryConstraintsStorage::getKnownTrajectoryConstrain
 void moveit_warehouse::TrajectoryConstraintsStorage::getKnownTrajectoryConstraints(std::vector<std::string> &names, const std::string &robot, const std::string &group) const
 {
   names.clear();
+  ROS_INFO("Dirty HAXX: Moveit should get known trajectory constraints here, but won't.");
+/*
   mongo_ros::Query q;
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -106,10 +114,14 @@ void moveit_warehouse::TrajectoryConstraintsStorage::getKnownTrajectoryConstrain
   for (std::size_t i = 0; i < constr.size() ; ++i)
     if (constr[i]->metadata.hasField(CONSTRAINTS_ID_NAME.c_str()))
       names.push_back(constr[i]->lookupString(CONSTRAINTS_ID_NAME));
+*/
 }
 
 bool moveit_warehouse::TrajectoryConstraintsStorage::getTrajectoryConstraints(TrajectoryConstraintsWithMetadata &msg_m, const std::string &name, const std::string &robot, const std::string &group) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get trajectory constraints here, but won't.");
+  return false;
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -123,10 +135,14 @@ bool moveit_warehouse::TrajectoryConstraintsStorage::getTrajectoryConstraints(Tr
     msg_m = constr.back();
     return true;
   }
+*/
 }
 
 void moveit_warehouse::TrajectoryConstraintsStorage::renameTrajectoryConstraints(const std::string &old_name, const std::string &new_name, const std::string &robot, const std::string &group)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename trajectory constraints here, but won't.");
+
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, old_name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -135,10 +151,14 @@ void moveit_warehouse::TrajectoryConstraintsStorage::renameTrajectoryConstraints
   mongo_ros::Metadata m(CONSTRAINTS_ID_NAME, new_name);
   constraints_collection_->modifyMetadata(q, m);
   ROS_DEBUG("Renamed constraints from '%s' to '%s'", old_name.c_str(), new_name.c_str());
+*/
 }
 
 void moveit_warehouse::TrajectoryConstraintsStorage::removeTrajectoryConstraints(const std::string &name, const std::string &robot, const std::string &group)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove trajectory constraints here, but won't.");
+
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -146,4 +166,5 @@ void moveit_warehouse::TrajectoryConstraintsStorage::removeTrajectoryConstraints
     q.append(CONSTRAINTS_GROUP_NAME, group);
   unsigned int rem = constraints_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u TrajectoryConstraints messages (named '%s')", rem, name.c_str());
+*/
 }

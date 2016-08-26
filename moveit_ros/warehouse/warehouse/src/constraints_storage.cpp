@@ -69,15 +69,21 @@ void moveit_warehouse::ConstraintsStorage::addConstraints(const moveit_msgs::Con
     removeConstraints(msg.name, robot, group);
     replace = true;
   }
+
+  ROS_INFO("Dirty HAXX: Moveit should store constraints now, but won't.");
+/*
   mongo_ros::Metadata metadata(CONSTRAINTS_ID_NAME, msg.name,
                                ROBOT_NAME, robot,
                                CONSTRAINTS_GROUP_NAME, group);
   constraints_collection_->insert(msg, metadata);
   ROS_DEBUG("%s constraints '%s'", replace ? "Replaced" : "Added", msg.name.c_str());
+*/
 }
 
 bool moveit_warehouse::ConstraintsStorage::hasConstraints(const std::string &name, const std::string &robot, const std::string &group) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should query for stored constraints now, but won't.");
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -85,6 +91,8 @@ bool moveit_warehouse::ConstraintsStorage::hasConstraints(const std::string &nam
     q.append(CONSTRAINTS_GROUP_NAME, group);
   std::vector<ConstraintsWithMetadata> constr = constraints_collection_->pullAllResults(q, true);
   return !constr.empty();
+*/
+  return false;
 }
 
 void moveit_warehouse::ConstraintsStorage::getKnownConstraints(const std::string &regex, std::vector<std::string> &names, const std::string &robot, const std::string &group) const
@@ -96,6 +104,8 @@ void moveit_warehouse::ConstraintsStorage::getKnownConstraints(const std::string
 void moveit_warehouse::ConstraintsStorage::getKnownConstraints(std::vector<std::string> &names, const std::string &robot, const std::string &group) const
 {
   names.clear();
+  ROS_INFO("Dirty HAXX: Moveit should ask for known constraints here, but won't.");
+/*
   mongo_ros::Query q;
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -105,10 +115,13 @@ void moveit_warehouse::ConstraintsStorage::getKnownConstraints(std::vector<std::
   for (std::size_t i = 0; i < constr.size() ; ++i)
     if (constr[i]->metadata.hasField(CONSTRAINTS_ID_NAME.c_str()))
       names.push_back(constr[i]->lookupString(CONSTRAINTS_ID_NAME));
+*/
 }
 
 bool moveit_warehouse::ConstraintsStorage::getConstraints(ConstraintsWithMetadata &msg_m, const std::string &name, const std::string &robot, const std::string &group) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should ask for known constraints here, but won't.");
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -124,10 +137,14 @@ bool moveit_warehouse::ConstraintsStorage::getConstraints(ConstraintsWithMetadat
     const_cast<moveit_msgs::Constraints*>(static_cast<const moveit_msgs::Constraints*>(msg_m.get()))->name = name;
     return true;
   }
+*/
+  return false;
 }
 
 void moveit_warehouse::ConstraintsStorage::renameConstraints(const std::string &old_name, const std::string &new_name, const std::string &robot, const std::string &group)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename constraints here, but won't.");
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, old_name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -136,10 +153,13 @@ void moveit_warehouse::ConstraintsStorage::renameConstraints(const std::string &
   mongo_ros::Metadata m(CONSTRAINTS_ID_NAME, new_name);
   constraints_collection_->modifyMetadata(q, m);
   ROS_DEBUG("Renamed constraints from '%s' to '%s'", old_name.c_str(), new_name.c_str());
+*/
 }
 
 void moveit_warehouse::ConstraintsStorage::removeConstraints(const std::string &name, const std::string &robot, const std::string &group)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename constraints here, but won't.");
+/*
   mongo_ros::Query q(CONSTRAINTS_ID_NAME, name);
   if (!robot.empty())
     q.append(ROBOT_NAME, robot);
@@ -147,4 +167,5 @@ void moveit_warehouse::ConstraintsStorage::removeConstraints(const std::string &
     q.append(CONSTRAINTS_GROUP_NAME, group);
   unsigned int rem = constraints_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u Constraints messages (named '%s')", rem, name.c_str());
+*/
 }

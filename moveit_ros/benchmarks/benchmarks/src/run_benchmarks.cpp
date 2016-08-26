@@ -67,6 +67,9 @@ int main(int argc, char **argv)
     return 1;
   }
 
+  ROS_INFO("Dirty HAXX: Moveit should try to connect to the database here, but won't.");
+
+/* DIRTY HAXX
   try
   {
     planning_scene_monitor::PlanningSceneMonitor psm(ROBOT_DESCRIPTION);
@@ -99,6 +102,7 @@ int main(int argc, char **argv)
     ROS_ERROR_STREAM("Unable to connect to warehouse. If you just created the database, it could take a while for initial setup. Please try to run the benchmark again."
                      << std::endl << ex.what());
   }
+*/
 
   ROS_INFO("Benchmarks complete! Shutting down ROS..."); // because sometimes there are segfaults after this
   ros::shutdown();

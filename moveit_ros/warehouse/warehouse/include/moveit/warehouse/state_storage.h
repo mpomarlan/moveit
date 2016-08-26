@@ -43,8 +43,14 @@
 namespace moveit_warehouse
 {
 
+
+typedef moveit_msgs::RobotStateConstPtr RobotStateWithMetadata;
+typedef boost::shared_ptr<std::vector<moveit_msgs::RobotState> > RobotStateCollection;
+
+/* DIRTY HAXX
 typedef mongo_ros::MessageWithMetadata<moveit_msgs::RobotState>::ConstPtr RobotStateWithMetadata;
 typedef boost::shared_ptr<mongo_ros::MessageCollection<moveit_msgs::RobotState> > RobotStateCollection;
+*/
 
 class RobotStateStorage : public MoveItMessageStorage
 {

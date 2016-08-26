@@ -60,6 +60,9 @@ void moveit_warehouse::PlanningSceneWorldStorage::reset()
 
 void moveit_warehouse::PlanningSceneWorldStorage::addPlanningSceneWorld(const moveit_msgs::PlanningSceneWorld &msg, const std::string &name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should store a planning scene world here, but won't.");
+
+/*
   bool replace = false;
   if (hasPlanningSceneWorld(name))
   {
@@ -69,13 +72,19 @@ void moveit_warehouse::PlanningSceneWorldStorage::addPlanningSceneWorld(const mo
   mongo_ros::Metadata metadata(PLANNING_SCENE_WORLD_ID_NAME, name);
   planning_scene_world_collection_->insert(msg, metadata);
   ROS_DEBUG("%s planning scene world '%s'", replace ? "Replaced" : "Added", name.c_str());
+*/
 }
 
 bool moveit_warehouse::PlanningSceneWorldStorage::hasPlanningSceneWorld(const std::string &name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get a planning scene world here, but won't.");
+  return false;
+
+/*
   mongo_ros::Query q(PLANNING_SCENE_WORLD_ID_NAME, name);
   std::vector<PlanningSceneWorldWithMetadata> psw = planning_scene_world_collection_->pullAllResults(q, true);
   return !psw.empty();
+*/
 }
 
 void moveit_warehouse::PlanningSceneWorldStorage::getKnownPlanningSceneWorlds(const std::string &regex, std::vector<std::string> &names) const
@@ -87,15 +96,23 @@ void moveit_warehouse::PlanningSceneWorldStorage::getKnownPlanningSceneWorlds(co
 void moveit_warehouse::PlanningSceneWorldStorage::getKnownPlanningSceneWorlds(std::vector<std::string> &names) const
 {
   names.clear();
+  ROS_INFO("Dirty HAXX: Moveit should get known planning scene worlds here, but won't.");
+
+/*
   mongo_ros::Query q;
   std::vector<PlanningSceneWorldWithMetadata> constr = planning_scene_world_collection_->pullAllResults(q, true, PLANNING_SCENE_WORLD_ID_NAME, true);
   for (std::size_t i = 0; i < constr.size() ; ++i)
     if (constr[i]->metadata.hasField(PLANNING_SCENE_WORLD_ID_NAME.c_str()))
       names.push_back(constr[i]->lookupString(PLANNING_SCENE_WORLD_ID_NAME));
+*/
 }
 
 bool moveit_warehouse::PlanningSceneWorldStorage::getPlanningSceneWorld(PlanningSceneWorldWithMetadata &msg_m, const std::string &name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get a planning scene world here, but won't.");
+
+  return false;
+/*
   mongo_ros::Query q(PLANNING_SCENE_WORLD_ID_NAME, name);
   std::vector<PlanningSceneWorldWithMetadata> psw = planning_scene_world_collection_->pullAllResults(q, false);
   if (psw.empty())
@@ -105,19 +122,28 @@ bool moveit_warehouse::PlanningSceneWorldStorage::getPlanningSceneWorld(Planning
     msg_m = psw.front();
     return true;
   }
+*/
 }
 
 void moveit_warehouse::PlanningSceneWorldStorage::renamePlanningSceneWorld(const std::string &old_name, const std::string &new_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename a planning scene world here, but won't.");
+
+/*
   mongo_ros::Query q(PLANNING_SCENE_WORLD_ID_NAME, old_name);
   mongo_ros::Metadata m(PLANNING_SCENE_WORLD_ID_NAME, new_name);
   planning_scene_world_collection_->modifyMetadata(q, m);
   ROS_DEBUG("Renamed planning scene world from '%s' to '%s'", old_name.c_str(), new_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneWorldStorage::removePlanningSceneWorld(const std::string &name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove a planning scene world here, but won't.");
+
+/*
   mongo_ros::Query q(PLANNING_SCENE_WORLD_ID_NAME, name);
   unsigned int rem = planning_scene_world_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u PlanningSceneWorld messages (named '%s')", rem, name.c_str());
+*/
 }

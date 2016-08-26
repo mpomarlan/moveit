@@ -75,8 +75,9 @@ moveit_warehouse::MoveItMessageStorage::~MoveItMessageStorage()
 
 void moveit_warehouse::MoveItMessageStorage::drop(const std::string &db)
 {
-  mongo_ros::dropDatabase(db, db_host_, db_port_, timeout_);
-  ROS_DEBUG("Dropped database '%s'", db.c_str());
+  ROS_INFO("Dirty HAXX: Moveit should drop database %s here, but won't.", db.c_str());
+  //mongo_ros::dropDatabase(db, db_host_, db_port_, timeout_);
+  //ROS_DEBUG("Dropped database '%s'", db.c_str());
 }
 
 void moveit_warehouse::MoveItMessageStorage::filterNames(const std::string &regex, std::vector<std::string> &names) const

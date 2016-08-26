@@ -43,8 +43,12 @@
 namespace moveit_warehouse
 {
 
+typedef moveit_msgs::PlanningSceneWorldConstPtr PlanningSceneWorldWithMetadata;
+typedef boost::shared_ptr<std::vector<moveit_msgs::PlanningSceneWorld> > PlanningSceneWorldCollection;
+/* DIRTY HAXX
 typedef mongo_ros::MessageWithMetadata<moveit_msgs::PlanningSceneWorld>::ConstPtr PlanningSceneWorldWithMetadata;
 typedef boost::shared_ptr<mongo_ros::MessageCollection<moveit_msgs::PlanningSceneWorld> > PlanningSceneWorldCollection;
+*/
 
 
 class PlanningSceneWorldStorage : public MoveItMessageStorage

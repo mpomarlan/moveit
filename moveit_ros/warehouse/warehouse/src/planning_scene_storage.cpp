@@ -73,20 +73,30 @@ void moveit_warehouse::PlanningSceneStorage::addPlanningScene(const moveit_msgs:
     removePlanningScene(scene.name);
     replace = true;
   }
+  ROS_INFO("Dirty HAXX: Moveit should store a planning scene here, but won't.");
+/*
   mongo_ros::Metadata metadata(PLANNING_SCENE_ID_NAME, scene.name);
   planning_scene_collection_->insert(scene, metadata);
   ROS_DEBUG("%s scene '%s'", replace ? "Replaced" : "Added", scene.name.c_str());
+*/
 }
 
 bool moveit_warehouse::PlanningSceneStorage::hasPlanningScene(const std::string &name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should query for a planning scene here, but won't.");
+  return false;
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, name);
   std::vector<PlanningSceneWithMetadata> planning_scenes = planning_scene_collection_->pullAllResults(q, true);
   return !planning_scenes.empty();
+*/
 }
 
 std::string moveit_warehouse::PlanningSceneStorage::getMotionPlanRequestName(const moveit_msgs::MotionPlanRequest &planning_query, const std::string &scene_name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get stored plan requests here, but won't.");
+  return "";
+/*
   // get all existing motion planning requests for this planning scene
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   std::vector<MotionPlanRequestWithMetadata> existing_requests = motion_plan_request_collection_->pullAllResults(q, false);
@@ -116,6 +126,7 @@ std::string moveit_warehouse::PlanningSceneStorage::getMotionPlanRequestName(con
       return existing_requests[i]->lookupString(MOTION_PLAN_REQUEST_ID_NAME);
   }
   return "";
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::addPlanningQuery(const moveit_msgs::MotionPlanRequest &planning_query, const std::string &scene_name, const std::string &query_name)
@@ -132,6 +143,9 @@ void moveit_warehouse::PlanningSceneStorage::addPlanningQuery(const moveit_msgs:
 
 std::string moveit_warehouse::PlanningSceneStorage::addNewPlanningRequest(const moveit_msgs::MotionPlanRequest &planning_query, const std::string &scene_name, const std::string &query_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should store a planning request here, but won't.");
+  return "Motion Plan Request";
+/*
   std::string id = query_name;
   if (id.empty())
   {
@@ -152,26 +166,33 @@ std::string moveit_warehouse::PlanningSceneStorage::addNewPlanningRequest(const 
   motion_plan_request_collection_->insert(planning_query, metadata);
   ROS_DEBUG("Saved planning query '%s' for scene '%s'", id.c_str(), scene_name.c_str());
   return id;
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::addPlanningResult(const moveit_msgs::MotionPlanRequest &planning_query, const moveit_msgs::RobotTrajectory &result, const std::string &scene_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should store a planning result here, but won't.");
+  /*
   std::string id = getMotionPlanRequestName(planning_query, scene_name);
   if (id.empty())
     id = addNewPlanningRequest(planning_query, scene_name, "");
   mongo_ros::Metadata metadata(PLANNING_SCENE_ID_NAME, scene_name,
                                MOTION_PLAN_REQUEST_ID_NAME, id);
   robot_trajectory_collection_->insert(result, metadata);
+  */
 }
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningSceneNames(std::vector<std::string> &names) const
 {
   names.clear();
+  ROS_INFO("Dirty HAXX: Moveit should retrieve planning scene names here, but won't.");
+/*
   mongo_ros::Query q;
   std::vector<PlanningSceneWithMetadata> planning_scenes = planning_scene_collection_->pullAllResults(q, true, PLANNING_SCENE_ID_NAME, true);
   for (std::size_t i = 0; i < planning_scenes.size() ; ++i)
     if (planning_scenes[i]->metadata.hasField(PLANNING_SCENE_ID_NAME.c_str()))
       names.push_back(planning_scenes[i]->lookupString(PLANNING_SCENE_ID_NAME));
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningSceneNames(const std::string &regex, std::vector<std::string> &names) const
@@ -194,6 +215,9 @@ bool moveit_warehouse::PlanningSceneStorage::getPlanningSceneWorld(moveit_msgs::
 
 bool moveit_warehouse::PlanningSceneStorage::getPlanningScene(PlanningSceneWithMetadata &scene_m, const std::string &scene_name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should retrieve a planning scene here, but won't.");
+  return false;
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   std::vector<PlanningSceneWithMetadata> planning_scenes = planning_scene_collection_->pullAllResults(q, false);
   if (planning_scenes.empty())
@@ -205,10 +229,14 @@ bool moveit_warehouse::PlanningSceneStorage::getPlanningScene(PlanningSceneWithM
   // in case the scene was renamed, the name in the message may be out of date
   const_cast<moveit_msgs::PlanningScene*>(static_cast<const moveit_msgs::PlanningScene*>(scene_m.get()))->name = scene_name;
   return true;
+*/
 }
 
 bool moveit_warehouse::PlanningSceneStorage::getPlanningQuery(MotionPlanRequestWithMetadata &query_m, const std::string &scene_name, const std::string &query_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should store a planning query here, but won't.");
+  return false;
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   q.append(MOTION_PLAN_REQUEST_ID_NAME, query_name);
   std::vector<MotionPlanRequestWithMetadata> planning_queries = motion_plan_request_collection_->pullAllResults(q, false);
@@ -222,22 +250,29 @@ bool moveit_warehouse::PlanningSceneStorage::getPlanningQuery(MotionPlanRequestW
     query_m = planning_queries.front();
     return true;
   }
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningQueries(std::vector<MotionPlanRequestWithMetadata> &planning_queries, const std::string &scene_name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should retrieve planning queries here, but won't.");
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   planning_queries = motion_plan_request_collection_->pullAllResults(q, false);
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningQueriesNames(std::vector<std::string> &query_names, const std::string &scene_name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get planning query names here, but won't.");
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   std::vector<MotionPlanRequestWithMetadata> planning_queries = motion_plan_request_collection_->pullAllResults(q, true);
   query_names.clear();
   for (std::size_t i = 0 ; i < planning_queries.size() ; ++i)
     if (planning_queries[i]->metadata.hasField(MOTION_PLAN_REQUEST_ID_NAME.c_str()))
       query_names.push_back(planning_queries[i]->lookupString(MOTION_PLAN_REQUEST_ID_NAME));
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningQueriesNames(const std::string &regex, std::vector<std::string> &query_names, const std::string &scene_name) const
@@ -262,6 +297,9 @@ void moveit_warehouse::PlanningSceneStorage::getPlanningQueriesNames(const std::
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningQueries(std::vector<MotionPlanRequestWithMetadata> &planning_queries, std::vector<std::string> &query_names, const std::string &scene_name) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get planning queries here, but won't.");
+
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   planning_queries = motion_plan_request_collection_->pullAllResults(q, false);
   query_names.resize(planning_queries.size());
@@ -270,6 +308,7 @@ void moveit_warehouse::PlanningSceneStorage::getPlanningQueries(std::vector<Moti
       query_names[i] = planning_queries[i]->lookupString(MOTION_PLAN_REQUEST_ID_NAME);
     else
       query_names[i].clear();
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::getPlanningResults(std::vector<RobotTrajectoryWithMetadata> &planning_results,
@@ -285,72 +324,102 @@ void moveit_warehouse::PlanningSceneStorage::getPlanningResults(std::vector<Robo
 void moveit_warehouse::PlanningSceneStorage::getPlanningResults(std::vector<RobotTrajectoryWithMetadata> &planning_results,
                                 const std::string &scene_name, const std::string &planning_query) const
 {
+  ROS_INFO("Dirty HAXX: Moveit should get planning results here, but won't.");
+
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   q.append(MOTION_PLAN_REQUEST_ID_NAME, planning_query);
   planning_results = robot_trajectory_collection_->pullAllResults(q, false);
+*/
 }
 
 bool moveit_warehouse::PlanningSceneStorage::hasPlanningQuery(const std::string &scene_name, const std::string &query_name) const
 {
+    ROS_INFO("Dirty HAXX: Moveit should get a planning query here, but won't.");
+  return false;
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   q.append(MOTION_PLAN_REQUEST_ID_NAME, query_name);
   std::vector<MotionPlanRequestWithMetadata> queries = motion_plan_request_collection_->pullAllResults(q, true);
   return !queries.empty();
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::renamePlanningScene(const std::string &old_scene_name, const std::string &new_scene_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename a planning scene here, but won't.");
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, old_scene_name);
   mongo_ros::Metadata m(PLANNING_SCENE_ID_NAME, new_scene_name);
   planning_scene_collection_->modifyMetadata(q, m);
   ROS_DEBUG("Renamed planning scene from '%s' to '%s'", old_scene_name.c_str(), new_scene_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::renamePlanningQuery(const std::string &scene_name, const std::string &old_query_name, const std::string &new_query_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should rename a planning query here, but won't.");
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   q.append(MOTION_PLAN_REQUEST_ID_NAME, old_query_name);
   mongo_ros::Metadata m(MOTION_PLAN_REQUEST_ID_NAME, new_query_name);
   motion_plan_request_collection_->modifyMetadata(q, m);
   ROS_DEBUG("Renamed planning query for scene '%s' from '%s' to '%s'", scene_name.c_str(), old_query_name.c_str(), new_query_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::removePlanningScene(const std::string &scene_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove a planning scene here, but won't.");
+/*
   removePlanningQueries(scene_name);
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   unsigned int rem = planning_scene_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u PlanningScene messages (named '%s')", rem, scene_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::removePlanningQueries(const std::string &scene_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove planning queries here, but won't.");
+/*
   removePlanningResults(scene_name);
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   unsigned int rem = motion_plan_request_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u MotionPlanRequest messages for scene '%s'", rem, scene_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::removePlanningQuery(const std::string &scene_name, const std::string &query_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove a planning query here, but won't.");
+
+/*
   removePlanningResults(scene_name, query_name);
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   q.append(MOTION_PLAN_REQUEST_ID_NAME, query_name);
   unsigned int rem = motion_plan_request_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u MotionPlanRequest messages for scene '%s', query '%s'", rem, scene_name.c_str(), query_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::removePlanningResults(const std::string &scene_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove planning results here, but won't.");
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   unsigned int rem = robot_trajectory_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u RobotTrajectory messages for scene '%s'", rem, scene_name.c_str());
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::removePlanningResults(const std::string &scene_name, const std::string &query_name)
 {
+  ROS_INFO("Dirty HAXX: Moveit should remove planning results here, but won't.");
+/*
   mongo_ros::Query q(PLANNING_SCENE_ID_NAME, scene_name);
   q.append(MOTION_PLAN_REQUEST_ID_NAME, query_name);
   unsigned int rem = robot_trajectory_collection_->removeMessages(q);
   ROS_DEBUG("Removed %u RobotTrajectory messages for scene '%s', query '%s'", rem, scene_name.c_str(), query_name.c_str());
+*/
 }

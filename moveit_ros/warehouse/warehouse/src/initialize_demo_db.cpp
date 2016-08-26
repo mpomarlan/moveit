@@ -83,6 +83,9 @@ int main(int argc, char **argv)
 
   bool done = false;
   unsigned int attempts = 0;
+
+  ROS_INFO("Dirty HAXX: a MongoDB reset should happen here, but won't. Nee-nurr nee-nurr.");
+#if 0
   while (!done && attempts < 5)
   {
     attempts++;
@@ -146,6 +149,7 @@ int main(int argc, char **argv)
       ros::WallDuration(15.0).sleep();
     }
   }
+#endif
 
   ros::shutdown();
 
