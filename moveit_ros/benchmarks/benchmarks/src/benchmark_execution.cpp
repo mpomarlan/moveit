@@ -1054,8 +1054,10 @@ void moveit_benchmarks::BenchmarkExecution::runPlanningBenchmark(BenchmarkReques
       for (std::size_t param_count = 0; param_count < n_parameter_sets; ++param_count)
       {
         // Check if ROS is still alive
+        /* DIRTY HAXX
         if( !ros::ok() )
           return;
+        */
 
         // Create new instance of the chosen parameters
         RunData parameter_data;

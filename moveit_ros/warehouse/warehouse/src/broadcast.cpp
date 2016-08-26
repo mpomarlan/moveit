@@ -98,6 +98,10 @@ int main(int argc, char **argv)
   ros::Publisher pub_scene, pub_req, pub_res, pub_constr, pub_state;
   ros::Duration wait_time(delay);
 
+  ROS_INFO("Dirty HAXX: Moveit should now publish a planning scene to the database, but won't.");
+/* DIRTY HAXX*/
+#if 0
+
   // publish the scene
   if (vm.count("scene"))
   {
@@ -201,6 +205,8 @@ int main(int argc, char **argv)
       }
     }
   }
+
+#endif
 
   ros::WallDuration(1.0).sleep();
   ROS_INFO("Done.");
