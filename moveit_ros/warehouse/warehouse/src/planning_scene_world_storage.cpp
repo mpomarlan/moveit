@@ -35,6 +35,7 @@
 /* Author: Ioan Sucan */
 
 #include <moveit/warehouse/planning_scene_world_storage.h>
+#include "ros/ros.h"
 
 const std::string moveit_warehouse::PlanningSceneWorldStorage::DATABASE_NAME = "moveit_planning_scene_worlds";
 const std::string moveit_warehouse::PlanningSceneWorldStorage::PLANNING_SCENE_WORLD_ID_NAME = "world_id";

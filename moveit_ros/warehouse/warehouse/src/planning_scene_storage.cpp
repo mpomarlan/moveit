@@ -36,6 +36,7 @@
 
 #include <moveit/warehouse/planning_scene_storage.h>
 #include <boost/regex.hpp>
+#include "ros/ros.h"
 
 const std::string moveit_warehouse::PlanningSceneStorage::DATABASE_NAME = "moveit_planning_scenes";
 

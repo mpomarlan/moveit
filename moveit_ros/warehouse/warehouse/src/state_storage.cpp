@@ -35,6 +35,7 @@
 /* Author: Ioan Sucan */
 
 #include <moveit/warehouse/state_storage.h>
+#include "ros/ros.h"
 
 const std::string moveit_warehouse::RobotStateStorage::DATABASE_NAME = "moveit_robot_states";
 

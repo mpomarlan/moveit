@@ -41,6 +41,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <moveit/warehouse/warehouse_connector.h>
+#include "ros/ros.h"
 
 namespace moveit_warehouse
 {

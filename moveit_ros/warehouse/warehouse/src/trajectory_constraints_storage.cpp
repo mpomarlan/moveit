@@ -35,6 +35,7 @@
 /* Author: Mario Prats, Ioan Sucan */
 
 #include <moveit/warehouse/trajectory_constraints_storage.h>
+#include "ros/ros.h"
 
 const std::string moveit_warehouse::TrajectoryConstraintsStorage::DATABASE_NAME = "moveit_trajectory_constraints";
 
