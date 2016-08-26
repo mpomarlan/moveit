@@ -11,7 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning
   roscpp
   rosconsole
-  warehouse_ros
+# DIRTY HAXX
+#  warehouse_ros
   tf
 )
 
@@ -22,7 +23,9 @@ catkin_package(
     warehouse/include
   CATKIN_DEPENDS
     moveit_ros_planning
-    warehouse_ros)
+# DIRTY HAX
+#    warehouse_ros
+)
 
 include_directories(warehouse/include)
 include_directories(${catkin_INCLUDE_DIRS})
