@@ -52,7 +52,9 @@ moveit_warehouse::TrajectoryConstraintsStorage::TrajectoryConstraintsStorage(con
 
 void moveit_warehouse::TrajectoryConstraintsStorage::createCollections(void)
 {
+/* DIRTY HAXX
   constraints_collection_.reset(new TrajectoryConstraintsCollection::element_type(DATABASE_NAME, "trajectory_constraints", db_host_, db_port_, timeout_));
+*/
 }
 
 void moveit_warehouse::TrajectoryConstraintsStorage::reset(void)

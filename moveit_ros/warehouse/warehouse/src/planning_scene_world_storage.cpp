@@ -49,7 +49,9 @@ moveit_warehouse::PlanningSceneWorldStorage::PlanningSceneWorldStorage(const std
 
 void moveit_warehouse::PlanningSceneWorldStorage::createCollections()
 {
+/* DIRTY HAXX
   planning_scene_world_collection_.reset(new PlanningSceneWorldCollection::element_type(DATABASE_NAME, "planning_scene_worlds", db_host_, db_port_, timeout_));
+*/
 }
 
 void moveit_warehouse::PlanningSceneWorldStorage::reset()

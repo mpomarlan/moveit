@@ -52,7 +52,9 @@ moveit_warehouse::ConstraintsStorage::ConstraintsStorage(const std::string &host
 
 void moveit_warehouse::ConstraintsStorage::createCollections()
 {
+/* DIRTY HAXX
   constraints_collection_.reset(new ConstraintsCollection::element_type(DATABASE_NAME, "constraints", db_host_, db_port_, timeout_));
+*/
 }
 
 void moveit_warehouse::ConstraintsStorage::reset()

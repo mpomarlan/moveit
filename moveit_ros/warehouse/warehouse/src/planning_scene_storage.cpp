@@ -52,9 +52,11 @@ moveit_warehouse::PlanningSceneStorage::PlanningSceneStorage(const std::string &
 
 void moveit_warehouse::PlanningSceneStorage::createCollections()
 {
+/* DIRTY HAXX
   planning_scene_collection_.reset(new PlanningSceneCollection::element_type(DATABASE_NAME, "planning_scene", db_host_, db_port_, timeout_));
   motion_plan_request_collection_.reset(new MotionPlanRequestCollection::element_type(DATABASE_NAME, "motion_plan_request", db_host_, db_port_, timeout_));
   robot_trajectory_collection_.reset(new RobotTrajectoryCollection::element_type(DATABASE_NAME, "robot_trajectory", db_host_, db_port_, timeout_));
+*/
 }
 
 void moveit_warehouse::PlanningSceneStorage::reset()

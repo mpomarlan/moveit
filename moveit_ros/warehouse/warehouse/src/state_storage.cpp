@@ -51,7 +51,9 @@ moveit_warehouse::RobotStateStorage::RobotStateStorage(const std::string &host, 
 
 void moveit_warehouse::RobotStateStorage::createCollections()
 {
+/* DIRTY HAXX
   state_collection_.reset(new RobotStateCollection::element_type(DATABASE_NAME, "robot_states", db_host_, db_port_, timeout_));
+*/
 }
 
 void moveit_warehouse::RobotStateStorage::reset()
