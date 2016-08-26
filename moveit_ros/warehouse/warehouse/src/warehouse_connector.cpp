@@ -34,7 +34,9 @@
 
 /* Author: E. Gil Jones */
 
+/* DIRTY HAXX
 #include <mongo_ros/message_collection.h>
+*/
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h>

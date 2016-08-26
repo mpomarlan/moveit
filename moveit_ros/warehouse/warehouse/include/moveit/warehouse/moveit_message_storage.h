@@ -37,7 +37,9 @@
 #ifndef MOVEIT_MOVEIT_WAREHOUSE_MOVEIT_MESSAGE_STORAGE_
 #define MOVEIT_MOVEIT_WAREHOUSE_MOVEIT_MESSAGE_STORAGE_
 
+/* DIRTY HAXX
 #include <mongo_ros/message_collection.h>
+*/
 #include <vector>
 #include <string>
 
