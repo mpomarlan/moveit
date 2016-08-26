@@ -149,6 +149,7 @@ void loadYaml(std::istream& in_stream, YAML::Node& doc_out)
 MoveItConfigData::MoveItConfigData() :
   config_pkg_generated_timestamp_(0)
 {
+/* DIRTY HAXX
   // Create an instance of SRDF writer and URDF model for all widgets to share
   srdf_.reset( new srdf::SRDFWriter() );
   urdf_model_.reset( new urdf::Model() );
@@ -162,6 +163,7 @@ MoveItConfigData::MoveItConfigData() :
   {
     setup_assistant_path_ = ".";
   }
+*/
 }
 
 // ******************************************************************************************
@@ -640,6 +642,7 @@ private:
   const std::string key_;
 };
 
+/* Dirty HAXX
 void MoveItConfigData::setCollisionLinkPairs(const moveit_setup_assistant::LinkPairMap &link_pairs, size_t skip_mask){
   // Create temp disabled collision
   srdf::Model::DisabledCollision dc;
@@ -666,6 +669,7 @@ void MoveItConfigData::setCollisionLinkPairs(const moveit_setup_assistant::LinkP
 
   srdf_->disabled_collisions_.assign(disabled_collisions.begin(), disabled_collisions.end());
 }
+*/
 
 
 // ******************************************************************************************
@@ -809,6 +813,7 @@ bool MoveItConfigData::inputKinematicsYAML( const std::string& file_path )
 // ******************************************************************************************
 // Set package path; try to resolve path from package name if directory does not exist
 // ******************************************************************************************
+/* DIRTY HAXX
 bool MoveItConfigData::setPackagePath( const std::string& pkg_path )
 {
   std::string full_package_path;
@@ -833,11 +838,13 @@ bool MoveItConfigData::setPackagePath( const std::string& pkg_path )
 
   config_pkg_path_ = full_package_path;
 }
+*/
 
 // ******************************************************************************************
 // Resolve path to .setup_assistant file
 // ******************************************************************************************
 
+/* DIRTY HAXX
 bool MoveItConfigData::getSetupAssistantYAMLPath( std::string& path )
 {
   path = appendPaths(config_pkg_path_, ".setup_assistant");
@@ -845,10 +852,13 @@ bool MoveItConfigData::getSetupAssistantYAMLPath( std::string& path )
   // Check if the old package is a setup assistant package
   return fs::is_regular_file( path );
 }
+*/
 
 // ******************************************************************************************
 // Make the full URDF path using the loaded .setup_assistant data
 // ******************************************************************************************
+
+/* DIRTY HAXX
 bool MoveItConfigData::createFullURDFPath()
 {
   boost::trim(urdf_pkg_name_);
@@ -877,16 +887,19 @@ bool MoveItConfigData::createFullURDFPath()
   // Check that this file exits -------------------------------------------------
   return fs::is_regular_file( urdf_path_ );
 }
+*/
 
 // ******************************************************************************************
 // Make the full SRDF path using the loaded .setup_assistant data
 // ******************************************************************************************
+/* DIRTY HAXX
 bool MoveItConfigData::createFullSRDFPath( const std::string& package_path )
 {
   srdf_path_ = appendPaths(package_path, srdf_pkg_relative_path_);
 
   return fs::is_regular_file( srdf_path_ );
 }
+*/
 
 
 // ******************************************************************************************
